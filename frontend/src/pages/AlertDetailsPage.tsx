@@ -1,15 +1,24 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetAlertById } from '../hooks/useAlertsApi';
+import { useDeleteAlerts, useGetAlertById } from '../hooks/useAlertsApi';
 import AlertCard from '../components/AlertCard';
 
 const AlertDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data, isPending, isError, error } = useGetAlertById(id);
+  const { data, isPending: alertPending, isError, error } = useGetAlertById(id);
+  const { mutate: deletealert, isPending: deletePending } = useDeleteAlerts(id);
 
-  if (isPending) return <h1>"Loading alert info...</h1>;
-  if (isError) alert(error.message);
+  if (alertPending) return <h1>"Loading alert info...</h1>;
+  if (deletePending) return <h1>"Deleting alert...</h1>;
+  if (isError) return error.message;
+
+  const handleDelete = () => {
+    deletealert(undefined, {
+      onSuccess: () => navigate('/'),
+      onError: (err) => alert(err.message),
+    });
+  };
 
   return (
     <div>
@@ -18,7 +27,7 @@ const AlertDetailsPage = () => {
       <button onClick={() => navigate('/alerts/update', { state: data })}>
         edit
       </button>
-      <button>delete</button>
+      <button onClick={handleDelete}>delete</button>
     </div>
   );
 };

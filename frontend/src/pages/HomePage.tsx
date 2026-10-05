@@ -20,7 +20,6 @@ const HomePage = () => {
   }, [data, setAlerts]);
 
   const alerts = useAlertStore((state) => state.alerts);
-  console.log(alerts);
 
   const resetFilters = useAlertStore((state) => state.resetFilters);
 
@@ -33,14 +32,21 @@ const HomePage = () => {
   );
   const setSelectedArena = useAlertStore((state) => state.setSelectedArena);
 
-  const filterredAlerts = alerts;
-  if (selectedPriority)
-    filterredAlerts.filter((a) => a.priority === selectedPriority);
-  if (nameSearch)
-    filterredAlerts.filter((a) =>
+  let filterredAlerts = alerts;
+  if (selectedPriority.length > 1) {
+    filterredAlerts = filterredAlerts.filter(
+      (a) => a.priority === selectedPriority
+    );
+  }
+  if (nameSearch.length > 1) {
+    filterredAlerts = filterredAlerts.filter((a) =>
       a.displayName.toLowerCase().includes(nameSearch.toLowerCase())
     );
-  if (selectedArena) filterredAlerts.filter((a) => a.arena === selectedArena);
+  }
+
+  if (selectedArena.length > 1) {
+    filterredAlerts = filterredAlerts.filter((a) => a.arena === selectedArena);
+  }
 
   console.log(filterredAlerts);
 

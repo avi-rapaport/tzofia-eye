@@ -74,6 +74,7 @@ const CreateAlertPage = () => {
           <input
             className="input"
             type="number"
+            step="0.0001"
             onChange={(e) => setLon(Number(e.target.value))}
           />
         </label>
@@ -83,6 +84,7 @@ const CreateAlertPage = () => {
           <input
             className="input"
             type="number"
+            step="0.0001"
             onChange={(e) => setLat(Number(e.target.value))}
           />
         </label>

@@ -53,10 +53,10 @@ export function useCreateAlerts() {
   });
 }
 
-export function useUpdateAlerts() {
+export function useUpdateAlerts(alertId: string) {
   return useMutation({
     mutationFn: async (body: UpdateAlertBody) => {
-      const res = await fetch('http://localhost:3001/api/alerts', {
+      const res = await fetch(`http://localhost:3001/api/alerts/${alertId}`, {
         credentials: 'include',
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -73,7 +73,7 @@ export function useUpdateAlerts() {
   });
 }
 
-export function useDeleteAlerts(alertId: string) {
+export function useDeleteAlerts(alertId: string | undefined) {
   return useMutation({
     mutationFn: async () => {
       const res = await fetch(`http://localhost:3001/api/alerts/${alertId}`, {
