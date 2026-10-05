@@ -2,21 +2,10 @@ import { useMemo } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet';
 import type { LatLngBoundsExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
-export type AlertPriority = 'Low' | 'Medium' | 'High' | 'Critical';
-
-export interface MapAlert {
-  id: string;
-  displayName: string;
-  description: string;
-  priority: string;
-  arena: string;
-  lon: number;
-  lat: number;
-}
+import type { Alert, AlertPriority } from '../types';
 
 export interface AlertsMapProps {
-  alerts: MapAlert[];
+  alerts: Alert[];
   /** Map height. The map needs an explicit height. Default: 520 */
   height?: number | string;
   className?: string;

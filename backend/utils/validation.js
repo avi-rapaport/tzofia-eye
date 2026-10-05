@@ -14,7 +14,7 @@ export const updateAlertSchema = z.object({
   description: z.string().optional(),
   priority: z.enum(['Low', 'Medium', 'High', 'Critical']).optional(),
   arena: z.enum(['north', 'south', 'center']).optional(),
-  status: z.enum(['active', 'in-progress', 'handled']).optional(),
+  status: z.enum(['active', 'handled']).optional(),
   lon: z.number().optional(),
   lat: z.number().optional(),
 });

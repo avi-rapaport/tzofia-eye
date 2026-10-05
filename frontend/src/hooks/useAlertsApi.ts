@@ -1,12 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import type { CreateAlertBody, FiletrToUse, UpdateAlertBody } from '../types';
+import type { CreateAlertBody, UpdateAlertBody } from '../types';
 
-export function useGetAlerts(filter: FiletrToUse) {
+export function useGetAlerts() {
   return useQuery({
     queryKey: ['alerts'],
     queryFn: async () => {
-      const query = Object.entries(filter).map((q) => `${q[0]}=${q[1]}`);
-      const res = await fetch(`http://localhost:3001/api/alerts?${query}`);
+      const res = await fetch(`http://localhost:3001/api/alerts`);
       const result = await res.json();
 
       if (!res.ok) {
