@@ -83,7 +83,7 @@ const HomePage = () => {
 
       <button onClick={resetFilters}>reset filters</button>
 
-      <Link className="create-alert-btn" to="/create">
+      <Link className="create-alert-btn" to="/alerts/create">
         Create new alert +
       </Link>
 

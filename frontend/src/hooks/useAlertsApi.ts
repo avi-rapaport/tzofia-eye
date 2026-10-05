@@ -17,7 +17,7 @@ export function useGetAlerts() {
   });
 }
 
-export function useGetAlertById(alertId: string) {
+export function useGetAlertById(alertId: string | undefined) {
   return useQuery({
     queryKey: ['alert'],
     queryFn: async () => {

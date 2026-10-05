@@ -32,6 +32,7 @@ export interface Alert {
   status: Status;
   lon: number;
   lat: number;
+  createdAt: string;
 }
 
 export interface Alerts {

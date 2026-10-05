@@ -28,3 +28,15 @@
   border-radius: 6px;
   border: 1px solid black;
 }
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.alert-item {
+  border-radius: 6px;
+  border: 1px solid black;
+  padding: 1rem;
+}

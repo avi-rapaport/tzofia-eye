@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { AlertPriority, Arena, Status } from '../types';
 import { useUpdateAlerts } from '../hooks/useAlertsApi';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const UpdateAlertPage = () => {
   const [displayName, setDisplayName] = useState('');
@@ -13,6 +13,8 @@ const UpdateAlertPage = () => {
   const [lat, setLat] = useState<number>(34.7854);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const alertToUpdate = location.state;
 
   const { mutate: update, isPending } = useUpdateAlerts();
 
@@ -29,7 +31,7 @@ const UpdateAlertPage = () => {
       lat,
     };
     update(alertData, {
-      onSuccess: () => navigate('/'),
+      onSuccess: () => navigate('/alerts/'),
       onError: (err) => alert(err.message),
     });
   };
@@ -42,6 +44,7 @@ const UpdateAlertPage = () => {
         <label>
           displayName
           <input
+            value={alertToUpdate.displayName}
             className="input"
             type="text"
             onChange={(e) => setDisplayName(e.target.value)}
@@ -51,6 +54,7 @@ const UpdateAlertPage = () => {
         <label>
           description
           <input
+            value={alertToUpdate.description}
             className="input"
             type="text"
             onChange={(e) => setDescription(e.target.value)}
@@ -60,6 +64,7 @@ const UpdateAlertPage = () => {
         <label>
           priority
           <select
+            value={alertToUpdate.priority}
             onChange={(e) => setPriority(e.target.value as AlertPriority)}
           >
             <option value="Low">Low</option>
@@ -71,7 +76,10 @@ const UpdateAlertPage = () => {
 
         <label>
           arena
-          <select onChange={(e) => setArena(e.target.value as Arena)}>
+          <select
+            value={alertToUpdate.arena}
+            onChange={(e) => setArena(e.target.value as Arena)}
+          >
             <option value="north">north</option>
             <option value="south">south</option>
             <option value="center">center</option>
@@ -80,7 +88,10 @@ const UpdateAlertPage = () => {
 
         <label>
           status
-          <select onChange={(e) => setStatus(e.target.value as Status)}>
+          <select
+            value={alertToUpdate.status}
+            onChange={(e) => setStatus(e.target.value as Status)}
+          >
             <option value="active">active</option>
             <option value="handled">handled</option>
           </select>
@@ -89,6 +100,7 @@ const UpdateAlertPage = () => {
         <label>
           longitude
           <input
+            value={alertToUpdate.lon}
             className="input"
             type="number"
             onChange={(e) => setLon(Number(e.target.value))}
@@ -98,13 +110,14 @@ const UpdateAlertPage = () => {
         <label>
           latitude
           <input
+            value={alertToUpdate.lat}
             className="input"
             type="number"
             onChange={(e) => setLat(Number(e.target.value))}
           />
         </label>
 
-        <button type="submit">Create alert</button>
+        <button type="submit">Update alert</button>
       </form>
     </div>
   );
