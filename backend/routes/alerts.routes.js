@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   const data = req.body;
   const newAlert = await alertsService.createAlert(data);
 
-  res.json({ success: true, data: newAlert });
+  res.status(201).json({ success: true, data: newAlert });
 });
 
 router.put('/:id', async (req, res) => {

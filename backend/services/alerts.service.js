@@ -29,7 +29,7 @@ async function getAlertById(alertId) {
 }
 
 async function createAlert(alertData) {
-  validateSchema(createAlertSchema);
+  validateSchema(createAlertSchema, alertData);
   const dataToSave = { ...alertData, status: 'active', createdAt: new Date() };
   const cretaed = await alertsRepo.createAlert(dataToSave);
   const { _id, ...rest } = cretaed;
@@ -40,7 +40,7 @@ async function createAlert(alertData) {
 async function updateAlert(alertId, newAlertData) {
   const alert = await getAlertById(alertId);
 
-  validateSchema(updateAlertSchema);
+  validateSchema(updateAlertSchema, newAlertData);
 
   const updated = await alertsRepo.updateAlert(alertId, newAlertData);
   const { _id, ...rest } = updated;
