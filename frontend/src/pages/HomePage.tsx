@@ -33,12 +33,15 @@ const HomePage = () => {
   );
   const setSelectedArena = useAlertStore((state) => state.setSelectedArena);
 
-  const filterredAlerts = alerts.filter(
-    (alert: Alert) =>
-      alert.displayName.toLowerCase().includes(nameSearch.toLowerCase()) &&
-      alert.arena === selectedArena &&
-      alert.priority === selectedPriority
-  );
+  const filterredAlerts = alerts;
+  if (selectedPriority)
+    filterredAlerts.filter((a) => a.priority === selectedPriority);
+  if (nameSearch)
+    filterredAlerts.filter((a) =>
+      a.displayName.toLowerCase().includes(nameSearch.toLowerCase())
+    );
+  if (selectedArena) filterredAlerts.filter((a) => a.arena === selectedArena);
+
   console.log(filterredAlerts);
 
   if (isLoading) return <h1>Loading alerts map...</h1>;

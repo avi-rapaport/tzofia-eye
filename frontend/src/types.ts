@@ -2,6 +2,8 @@ export type AlertPriority = 'Low' | 'Medium' | 'High' | 'Critical';
 
 export type Arena = 'north' | 'south' | 'center';
 
+export type Status = 'active' | 'handled';
+
 export interface CreateAlertBody {
   displayName: string;
   description: string;
@@ -16,7 +18,7 @@ export interface UpdateAlertBody {
   description: string;
   priority: AlertPriority;
   arena: Arena;
-  status: 'active' | 'handled';
+  status: Status;
   lon: number;
   lat: number;
 }
@@ -27,6 +29,7 @@ export interface Alert {
   description: string;
   priority: AlertPriority;
   arena: Arena;
+  status: Status;
   lon: number;
   lat: number;
 }
