@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const createAlertSchema = z.object({
   displayName: z.string(),
   description: z.string(),
-  priority: z.enum(['low', 'medium', 'high', 'critical']),
+  priority: z.enum(['Low', 'Medium', 'High', 'Critical']),
   arena: z.enum(['north', 'south', 'center']),
   lon: z.number(),
   lat: z.number(),
@@ -12,7 +12,7 @@ export const createAlertSchema = z.object({
 export const updateAlertSchema = z.object({
   displayName: z.string().optional(),
   description: z.string().optional(),
-  priority: z.enum(['low', 'medium', 'high', 'critical']).optional(),
+  priority: z.enum(['Low', 'Medium', 'High', 'Critical']).optional(),
   arena: z.enum(['north', 'south', 'center']).optional(),
   status: z.enum(['active', 'in-progress', 'handled']).optional(),
   lon: z.number().optional(),
