@@ -7,21 +7,21 @@ router.get('/', async (req, res) => {
   const query = req.query;
   const alerts = await alertsService.getAlerts(query);
 
-  res.json({ success: true, data: alerts });
+  res.json(alerts);
 });
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const alert = await alertsService.getAlertById(id);
 
-  res.json({ success: true, data: alert });
+  res.json(alert);
 });
 
 router.post('/', async (req, res) => {
   const data = req.body;
   const newAlert = await alertsService.createAlert(data);
 
-  res.status(201).json({ success: true, data: newAlert });
+  res.status(201).json(newAlert);
 });
 
 router.put('/:id', async (req, res) => {
@@ -29,12 +29,12 @@ router.put('/:id', async (req, res) => {
   const data = req.body;
   const updatedAlert = await alertsService.updateAlert(id, data);
 
-  res.json({ success: true, data: updatedAlert });
+  res.json(updatedAlert);
 });
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const deletedAlert = await alertsService.deleteAlert(id);
 
-  res.json({ success: true, data: deletedAlert });
+  res.json(deletedAlert);
 });

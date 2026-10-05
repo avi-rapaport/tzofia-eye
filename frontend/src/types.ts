@@ -46,4 +46,5 @@ export interface AlertStoreProps {
   setNameSearch: (name: string) => void;
   setSelectedPriority: (priority: AlertPriority) => void;
   setSelectedArena: (arena: Arena) => void;
+  resetFilters: () => void;
 }

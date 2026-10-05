@@ -7,11 +7,11 @@ export function useGetAlerts() {
     queryFn: async () => {
       const res = await fetch(`http://localhost:3001/api/alerts`);
       const result = await res.json();
+      console.log(result);
 
       if (!res.ok) {
         throw new Error(result.message);
       }
-
       return result;
     },
   });
