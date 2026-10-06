@@ -16,7 +16,15 @@ async function getUsers(filter) {
 
 async function getUserById(userId) {
   const collection = await getCollection();
-  const user = await collection.findOne({ _id: new ObjectId(userId) });
+  const user = await collection.findOne({
+    _id: new ObjectId(alertId),
+  });
+  return user;
+}
+
+async function getUserByName(userName) {
+  const collection = await getCollection();
+  const user = await collection.findOne({ userName });
   return user;
 }
 
@@ -35,8 +43,10 @@ async function deleteUserById(userId) {
   return deleted;
 }
 
-export const alertsRepo = {
+export const usersRepo = {
   getUsers,
+  getUserById,
+  getUserByName,
   saveUser,
   deleteUserById,
 };
