@@ -7,9 +7,10 @@ const UserDetailsPage = () => {
   const navigate = useNavigate();
 
   const { data, isPending } = useGetUserById(id);
+  console.log(data);
   const { mutate: deleteUser } = useDeleteUser(id);
 
-  if (isPending) return <h1>"Deleting alert...</h1>;
+  if (isPending) return <h1>"Loading...</h1>;
 
   const handleDelete = () => {
     deleteUser(undefined, {

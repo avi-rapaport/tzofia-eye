@@ -7,7 +7,7 @@ const RegisterPage = () => {
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [role, setRole] = useState<Role>('arena_user');
+  const [role, setRole] = useState<Role>('arenaUser');
   const [assignedArena, setAssignedArena] = useState<AssignedArena>('all');
   const navigate = useNavigate();
 

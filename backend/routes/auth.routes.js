@@ -11,19 +11,19 @@ router.get('/me', authMiddleware, (req, res) => {
   res.json(user);
 });
 
-router.get('/users', adminMiddleware, async (req, res) => {
+router.get('/users', authMiddleware, adminMiddleware, async (req, res) => {
   const query = req.query;
   const users = await authService.getUsers(query);
   res.json(users);
 });
 
-router.get('/users/:id', (req, res) => {
+router.get('/users/:id', authMiddleware, adminMiddleware, (req, res) => {
   const { id } = req.params;
   const user = authService.getUserById(id);
   res.json(user);
 });
 
-router.post('/register', adminMiddleware, async (req, res) => {
+router.post('/register', authMiddleware, adminMiddleware, async (req, res) => {
   const userData = req.body;
   const created = await authService.register(userData);
 

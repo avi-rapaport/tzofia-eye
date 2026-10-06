@@ -12,7 +12,7 @@ const UsersList = ({ users }: Users) => {
       {users.map((user) => (
         <div key={user.id} onClick={() => navigate(`/users/${user.id}`)}>
           <h1>{user.userName}</h1>
-          <h4>{user.assignedArena}</h4>
+          <h2>{user.role}</h2>
         </div>
       ))}
     </div>

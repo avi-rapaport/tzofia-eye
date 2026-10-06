@@ -57,7 +57,7 @@ export interface LoginBody {
   password: string;
 }
 
-export type Role = 'arena_user' | 'general_user' | 'admin';
+export type Role = 'arenaUser' | 'generalUser' | 'admin';
 export type AssignedArena = 'north' | 'south' | 'center' | 'all';
 
 export interface RegisterBody {

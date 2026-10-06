@@ -20,7 +20,7 @@ export function useMe() {
 
 export function useGetUsers() {
   return useQuery({
-    queryKey: ['me'],
+    queryKey: ['users'],
     queryFn: async () => {
       const res = await fetch('http://localhost:3001/api/auth/users', {
         credentials: 'include',
@@ -38,7 +38,7 @@ export function useGetUsers() {
 
 export function useGetUserById(userId: string | undefined) {
   return useQuery({
-    queryKey: ['me'],
+    queryKey: ['user'],
     queryFn: async () => {
       const res = await fetch(
         `http://localhost:3001/api/auth/users/${userId}`,
