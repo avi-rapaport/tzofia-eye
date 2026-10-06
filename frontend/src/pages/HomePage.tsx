@@ -15,6 +15,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setAlerts(data);
     }
   }, [data, setAlerts]);
@@ -93,11 +94,11 @@ const HomePage = () => {
             <option value="center">center</option>
           </select>
         </label>
-      </div>
 
-      <Link className="create-alert-btn" to="/alerts/create">
-        Create new alert +
-      </Link>
+        <Link className="create-alert-btn" to="/alerts/create">
+          Create new alert +
+        </Link>
+      </div>
 
       <h1>Alerts</h1>
       <AlertsList alerts={filterredAlerts} />

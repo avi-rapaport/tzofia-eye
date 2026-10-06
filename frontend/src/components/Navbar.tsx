@@ -37,9 +37,9 @@ const Navbar = () => {
         )}
       </div>
 
-      <h1>Tzofia eye system</h1>
+      <h1>Tzofia Eye system</h1>
 
-      <button onClick={handleLogout} className="logout-btn">
+      <button onClick={handleLogout} className="action-btn">
         Logout
       </button>
     </div>
