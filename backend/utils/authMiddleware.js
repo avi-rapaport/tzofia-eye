@@ -5,6 +5,7 @@ export function authMiddleware(req, res, next) {
   if (!token) {
     const error = new Error('Invalid or missing token!');
     error.status = 403;
+    throw error;
   }
 
   const decoded = jwt.verify(token, process.env.SECRET_KEY);

@@ -2,42 +2,42 @@ import express from 'express';
 import { alertsService } from '../services/alerts.service.js';
 import { authMiddleware } from '../utils/authMiddleware.js';
 import { authService } from '../services/auth.services.js';
+import { adminMiddleware } from '../utils/adminMiddleware.js';
 
 export const router = express.Router();
 
-router.use(authMiddleware);
+router.get('/me', (req, res) => {
+  const user = req.user;
+  res.json(user);
+});
 
-router.get('/users', async (req, res) => {
+router.get('/users', adminMiddleware, async (req, res) => {
   const query = req.query;
   const users = await authService.getUsers(query);
   res.json(users);
 });
 
-router.get('/register', async (req, res) => {
-  const userData = req.params;
+router.get('/register', adminMiddleware, async (req, res) => {
+  const userData = req.body;
   const created = await authService.register(userData);
 
-  res.json(created);
+  res.status(201).json(created);
 });
 
-router.post('/', async (req, res) => {
-  const data = req.body;
-  const newAlert = await alertsService.createAlert(data);
+router.post('/login', async (req, res) => {
+  const { userName, password } = req.body;
+  const token = await authService.login(userName, password);
+  res.cookie('token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+  });
 
-  res.status(201).json(newAlert);
+  res.json({ message: 'User logged in successfully' });
 });
 
-router.put('/:id', async (req, res) => {
+router.delete('/users/:id', adminMiddleware, async (req, res) => {
   const { id } = req.params;
-  const data = req.body;
-  const updatedAlert = await alertsService.updateAlert(id, data);
+  const deleted = await authService.deleteUserById(id);
 
-  res.json(updatedAlert);
-});
-
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-  const deletedAlert = await alertsService.deleteAlert(id);
-
-  res.json(deletedAlert);
+  res.json(deleted);
 });

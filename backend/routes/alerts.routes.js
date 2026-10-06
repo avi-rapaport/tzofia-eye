@@ -1,7 +1,11 @@
 import express from 'express';
 import { alertsService } from '../services/alerts.service.js';
+import { authMiddleware } from '../utils/authMiddleware.js';
+import { arenaMiddleware } from '../utils/arenaMiddleware.js';
 
 export const router = express.Router();
+
+router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
   const query = req.query;
@@ -10,21 +14,21 @@ router.get('/', async (req, res) => {
   res.json(alerts);
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', arenaMiddleware, async (req, res) => {
   const { id } = req.params;
   const alert = await alertsService.getAlertById(id);
 
   res.json(alert);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', arenaMiddleware, async (req, res) => {
   const data = req.body;
   const newAlert = await alertsService.createAlert(data);
 
   res.status(201).json(newAlert);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', arenaMiddleware, async (req, res) => {
   const { id } = req.params;
   const data = req.body;
   const updatedAlert = await alertsService.updateAlert(id, data);
@@ -32,7 +36,7 @@ router.put('/:id', async (req, res) => {
   res.json(updatedAlert);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', arenaMiddleware, async (req, res) => {
   const { id } = req.params;
   const deletedAlert = await alertsService.deleteAlert(id);
 
