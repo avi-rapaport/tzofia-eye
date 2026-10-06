@@ -5,9 +5,10 @@ export function useMe() {
   return useQuery({
     queryKey: ['me'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:3001/api/auth/me');
+      const res = await fetch('http://localhost:3001/api/auth/me', {
+        credentials: 'include',
+      });
       const result = await res.json();
-      console.log(result);
 
       if (!res.ok) {
         throw new Error(result.message);
@@ -21,7 +22,9 @@ export function useGetUsers() {
   return useQuery({
     queryKey: ['me'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:3001/api/auth/users');
+      const res = await fetch('http://localhost:3001/api/auth/users', {
+        credentials: 'include',
+      });
       const result = await res.json();
       console.log(result);
 
@@ -41,6 +44,24 @@ export function useLogin() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+      });
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      return result;
+    },
+  });
+}
+
+export function useLogout() {
+  return useMutation({
+    mutationFn: async () => {
+      const res = await fetch('http://localhost:3001/api/auth/logout', {
+        credentials: 'include',
+        method: 'POST',
       });
       const result = await res.json();
 

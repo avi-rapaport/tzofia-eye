@@ -21,7 +21,7 @@ export const updateAlertSchema = z.object({
 
 export const registerSchema = z.object({
   userName: z.string(),
-  password: z.string().minLength(6),
+  password: z.string(),
   email: z.email(),
   role: z.enum(['arenaUser', 'generalUser', 'admin']),
   assignedArena: z.enum(['north', 'south', 'center', 'all']),
@@ -29,7 +29,7 @@ export const registerSchema = z.object({
 
 export const loginSchema = z.object({
   userName: z.string(),
-  password: z.string().minLength(6),
+  password: z.string(),
 });
 
 export function validateSchema(schema, body) {
@@ -43,12 +43,3 @@ export function validateSchema(schema, body) {
 
   body = result.data;
 }
-
-// {
-//     "displayName": "border breaching",
-//     "description": "five armed people breachd into the border",
-//     "priority": "high",
-//     "arena": "center",
-//     "lon": 34.7854,
-//     "lat": 32.0864
-// }

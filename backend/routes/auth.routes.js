@@ -6,7 +6,7 @@ import { adminMiddleware } from '../utils/adminMiddleware.js';
 
 export const router = express.Router();
 
-router.get('/me', (req, res) => {
+router.get('/me', authMiddleware, (req, res) => {
   const user = req.user;
   res.json(user);
 });
@@ -17,7 +17,7 @@ router.get('/users', adminMiddleware, async (req, res) => {
   res.json(users);
 });
 
-router.get('/register', adminMiddleware, async (req, res) => {
+router.post('/register', adminMiddleware, async (req, res) => {
   const userData = req.body;
   const created = await authService.register(userData);
 
@@ -26,17 +26,19 @@ router.get('/register', adminMiddleware, async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { userName, password } = req.body;
-  const token = await authService.login(userName, password);
+
+  const { user, token } = await authService.login(userName, password);
   res.cookie('token', token, {
     httpOnly: true,
     sameSite: 'lax',
   });
 
-  res.json({ message: 'User logged in successfully' });
+  res.json(user);
 });
 
 router.post('/logout', (req, res) => {
-  res.clearCookie('token', { httpOnly: true, sameSite: 'lax' });
+  res.clearCookie('token');
+  res.json({ message: 'User logged out successfully' });
 });
 
 router.delete('/users/:id', adminMiddleware, async (req, res) => {

@@ -21,8 +21,6 @@ const HomePage = () => {
 
   const alerts = useAlertStore((state) => state.alerts);
 
-  const resetFilters = useAlertStore((state) => state.resetFilters);
-
   const nameSearch = useAlertStore((state) => state.nameSearch);
   const selectedPriority = useAlertStore((state) => state.selectedPriority);
   const selectedArena = useAlertStore((state) => state.selectedArena);
@@ -45,53 +43,57 @@ const HomePage = () => {
       const matchArena =
         selectedArena === '' ||
         alert.arena.toLowerCase() === selectedArena.toLowerCase();
-      console.log(matchPriority, selectedPriority, selectedArena);
+
       return matchName && matchPriority && matchArena;
     });
   }, [alerts, nameSearch, selectedPriority, selectedArena]);
 
-  console.log(filterredAlerts);
-
   if (isLoading) return <h1>Loading alerts map...</h1>;
-  if (error) alert(error);
+  if (error) return <h1>Error: {error}</h1>;
 
   return (
     <div className="home-page">
       <AlertsMap alerts={filterredAlerts} height={450} />
 
-      <label>
-        search display name
-        <input
-          type="text"
-          placeholder="search..."
-          onChange={(e) => setNameSearch(e.target.value)}
-        />
-      </label>
+      <div className="filters">
+        <label>
+          <input
+            className="input"
+            type="text"
+            placeholder="search display name..."
+            onChange={(e) => setNameSearch(e.target.value)}
+          />
+        </label>
 
-      <label>
-        priority
-        <select
-          onChange={(e) => setSelectedPriority(e.target.value as AlertPriority)}
-        >
-          <option value="">All</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">Hige</option>
-          <option value="Critical">Critical</option>
-        </select>
-      </label>
+        <label>
+          priority
+          <select
+            className="select"
+            onChange={(e) =>
+              setSelectedPriority(e.target.value as AlertPriority)
+            }
+          >
+            <option value="">All</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">Hige</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </label>
 
-      <label>
-        arena
-        <select onChange={(e) => setSelectedArena(e.target.value as Arena)}>
-          <option value="">all</option>
-          <option value="north">north</option>
-          <option value="south">south</option>
-          <option value="center">center</option>
-        </select>
-      </label>
-
-      <button onClick={resetFilters}>reset filters</button>
+        <label>
+          arena
+          <select
+            className="select"
+            onChange={(e) => setSelectedArena(e.target.value as Arena)}
+          >
+            <option value="">all</option>
+            <option value="north">north</option>
+            <option value="south">south</option>
+            <option value="center">center</option>
+          </select>
+        </label>
+      </div>
 
       <Link className="create-alert-btn" to="/alerts/create">
         Create new alert +

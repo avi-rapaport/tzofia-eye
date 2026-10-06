@@ -1,4 +1,4 @@
-import { alertsService } from '../services/alerts.service';
+import { alertsService } from '../services/alerts.service.js';
 
 export async function statusMiddleware(req, res, next) {
   const role = req.user.role;

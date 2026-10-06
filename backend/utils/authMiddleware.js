@@ -1,8 +1,11 @@
 import jwt from 'jsonwebtoken';
+import { authService } from '../services/auth.services.js';
 
-export function authMiddleware(req, res, next) {
+export async function authMiddleware(req, res, next) {
   const token = req.cookies.token;
+
   if (!token) {
+    console.log('aaaa');
     const error = new Error('Invalid or missing token!');
     error.status = 403;
     throw error;
@@ -10,8 +13,8 @@ export function authMiddleware(req, res, next) {
 
   const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-  const { id, userName, email, role } = decoded;
-  const user = { id, userName, email, role };
+  const { userName } = decoded;
+  const user = await authService.getUserByName(userName);
 
   req.user = user;
 

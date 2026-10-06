@@ -14,8 +14,6 @@ export const useAlertStore = create<AlertStoreProps>((set) => ({
   selectedArena: '',
   setNameSearch: (name: string) => set({ nameSearch: name }),
   setSelectedPriority: (priority: AlertPriority) =>
-    set({ selectedArena: priority }),
+    set({ selectedPriority: priority }),
   setSelectedArena: (arena: Arena) => set({ selectedArena: arena }),
-  resetFilters: () =>
-    set({ nameSearch: '', selectedPriority: '', selectedArena: '' }),
 }));

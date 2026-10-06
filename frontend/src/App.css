@@ -1,4 +1,35 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.create-page {
+  padding: 1rem;
+}
+
+.update-page {
+  padding: 1rem;
+}
+
+.register-page {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -14,19 +45,17 @@
   text-decoration: none;
 }
 
-.create-page {
-  padding: 1rem;
-}
-
 .form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 
 .input {
-  border-radius: 6px;
-  border: 1px solid black;
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 5px;
 }
 
 .alert-list {
@@ -39,4 +68,44 @@
   border-radius: 6px;
   border: 1px solid black;
   padding: 1rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 1rem;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: blue;
+}
+
+.reset-btn {
+  width: fit-content;
+  padding: 0.5rem;
+}
+
+.action-btn {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+}
+
+.select {
+  padding: 0.3rem;
+  margin: 0.6rem;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }

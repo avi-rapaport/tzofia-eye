@@ -3,12 +3,13 @@ import { alertsService } from '../services/alerts.service.js';
 import { authMiddleware } from '../utils/authMiddleware.js';
 import { arenaMiddleware } from '../utils/arenaMiddleware.js';
 import { statusMiddleware } from '../utils/statusMiddleware.js';
+import { arenaFilterMiddleware } from '../utils/arenaFilterMiddleware.js';
 
 export const router = express.Router();
 
 router.use(authMiddleware);
 
-router.get('/', async (req, res) => {
+router.get('/', arenaFilterMiddleware, async (req, res) => {
   const query = req.query;
   const alerts = await alertsService.getAlerts(query);
 

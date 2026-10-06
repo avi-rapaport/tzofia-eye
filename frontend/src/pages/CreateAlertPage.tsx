@@ -20,7 +20,7 @@ const CreateAlertPage = () => {
 
     const alertData = { displayName, description, priority, arena, lon, lat };
     create(alertData, {
-      onSuccess: () => navigate('/'),
+      onSuccess: () => navigate('/alerts'),
       onError: (err) => alert(err.message),
     });
   };
@@ -30,29 +30,25 @@ const CreateAlertPage = () => {
   return (
     <div className="create-page">
       <form onSubmit={handleCreate} className="form">
-        <label>
-          displayName
-          <input
-            className="input"
-            type="text"
-            onChange={(e) => setDisplayName(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          placeholder="displayName"
+          className="input"
+          type="text"
+          onChange={(e) => setDisplayName(e.target.value)}
+          required
+        />
 
-        <label>
-          description
-          <input
-            className="input"
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </label>
+        <textarea
+          placeholder="description"
+          className="input"
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
 
         <label>
           priority
           <select
+            className="select"
             onChange={(e) => setPriority(e.target.value as AlertPriority)}
             required
           >
@@ -65,36 +61,38 @@ const CreateAlertPage = () => {
 
         <label>
           arena
-          <select onChange={(e) => setArena(e.target.value as Arena)} required>
+          <select
+            className="select"
+            onChange={(e) => setArena(e.target.value as Arena)}
+            required
+          >
             <option value="north">north</option>
             <option value="south">south</option>
             <option value="center">center</option>
           </select>
         </label>
 
-        <label>
-          longitude
-          <input
-            className="input"
-            type="number"
-            step="0.0001"
-            onChange={(e) => setLon(Number(e.target.value))}
-            required
-          />
-        </label>
+        <input
+          placeholder="longitude"
+          className="input"
+          type="number"
+          step="0.0001"
+          onChange={(e) => setLon(Number(e.target.value))}
+          required
+        />
 
-        <label>
-          latitude
-          <input
-            className="input"
-            type="number"
-            step="0.0001"
-            onChange={(e) => setLat(Number(e.target.value))}
-            required
-          />
-        </label>
+        <input
+          placeholder=" latitude"
+          className="input"
+          type="number"
+          step="0.0001"
+          onChange={(e) => setLat(Number(e.target.value))}
+          required
+        />
 
-        <button type="submit">Create alert</button>
+        <button type="submit" className="action-btn">
+          Create alert
+        </button>
       </form>
     </div>
   );

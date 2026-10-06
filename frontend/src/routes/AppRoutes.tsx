@@ -9,6 +9,7 @@ import LoginPage from '../pages/LoginPage';
 import AdminRoutes from './AdminRoutes';
 import RegisterPage from '../pages/RegisterPage';
 import UsersPage from '../pages/UsersPage';
+import Layout from '../components/Layout';
 
 const AppRoutes = () => {
   return (
@@ -22,10 +23,12 @@ const AppRoutes = () => {
       </Route>
 
       <Route element={<ProtectedRoutes />}>
-        <Route path="/alerts" element={<HomePage />} />
-        <Route path="/alerts/create" element={<CreateAlertPage />} />
-        <Route path="/alerts/update" element={<UpdateAlertPage />} />
-        <Route path="/alerts/:id" element={<AlertDetailsPage />} />
+        <Route element={<Layout />}>
+          <Route path="/alerts" element={<HomePage />} />
+          <Route path="/alerts/create" element={<CreateAlertPage />} />
+          <Route path="/alerts/update" element={<UpdateAlertPage />} />
+          <Route path="/alerts/:id" element={<AlertDetailsPage />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

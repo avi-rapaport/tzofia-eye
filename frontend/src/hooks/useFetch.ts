@@ -12,7 +12,8 @@ export function useFetch<T>(url: string) {
       setIsLoading(true);
 
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, { credentials: 'include' });
+
         const result = await res.json();
         if (!res.ok) {
           throw new Error(result.message);

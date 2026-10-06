@@ -1,4 +1,4 @@
-import { alertsService } from '../services/alerts.service';
+import { alertsService } from '../services/alerts.service.js';
 
 export async function arenaMiddleware(req, res, next) {
   const assignedArena = req.user.assignedArena;

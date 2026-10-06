@@ -7,6 +7,7 @@ const ProtectedRoutes = () => {
   if (isPending) return <h1>Verify...</h1>;
 
   if (isError) {
+    console.log(isError);
     return <Navigate to="/login" />;
   }
 

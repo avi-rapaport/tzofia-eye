@@ -15,7 +15,7 @@ const AlertDetailsPage = () => {
 
   const handleDelete = () => {
     deletealert(undefined, {
-      onSuccess: () => navigate('/'),
+      onSuccess: () => navigate('/alerts'),
       onError: (err) => alert(err.message),
     });
   };

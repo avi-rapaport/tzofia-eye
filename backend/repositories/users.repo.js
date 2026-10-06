@@ -17,7 +17,7 @@ async function getUsers(filter) {
 async function getUserById(userId) {
   const collection = await getCollection();
   const user = await collection.findOne({
-    _id: new ObjectId(alertId),
+    _id: new ObjectId(userId),
   });
   return user;
 }
@@ -31,7 +31,7 @@ async function getUserByName(userName) {
 async function saveUser(userData) {
   const collection = await getCollection();
   const created = await collection.insertOne(userData);
-  return { id: created.insertedId.toString(), ...users };
+  return { id: created.insertedId.toString(), ...userData };
 }
 
 async function deleteUserById(userId) {

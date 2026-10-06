@@ -50,7 +50,6 @@ export interface AlertStoreProps {
   setNameSearch: (name: string) => void;
   setSelectedPriority: (priority: AlertPriority) => void;
   setSelectedArena: (arena: Arena) => void;
-  resetFilters: () => void;
 }
 
 export interface LoginBody {
@@ -62,9 +61,24 @@ export type Role = 'arena_user' | 'general_user' | 'admin';
 export type AssignedArena = 'north' | 'south' | 'center' | 'all';
 
 export interface RegisterBody {
-  userNmae: string;
+  userName: string;
   password: string;
   email: string;
   role: Role;
   assignedArena: AssignedArena;
+}
+
+export interface User {
+  id: string;
+  userName: string;
+  password: string;
+  email: string;
+  role: Role;
+  assignedArena: AssignedArena;
+}
+
+export interface UsersStoreProps {
+  user: User | null;
+  setUser: (user: User) => void;
+  removeUser: () => void;
 }

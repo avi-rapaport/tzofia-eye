@@ -5,7 +5,9 @@ export function useGetAlerts() {
   return useQuery({
     queryKey: ['alerts'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3001/api/alerts`);
+      const res = await fetch('http://localhost:3001/api/alerts', {
+        credentials: 'include',
+      });
       const result = await res.json();
       console.log(result);
 
@@ -21,7 +23,9 @@ export function useGetAlertById(alertId: string | undefined) {
   return useQuery({
     queryKey: ['alert'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3001/api/alerts/${alertId}`);
+      const res = await fetch(`http://localhost:3001/api/alerts/${alertId}`, {
+        credentials: 'include',
+      });
       const result = await res.json();
 
       if (!res.ok) {

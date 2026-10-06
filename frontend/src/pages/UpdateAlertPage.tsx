@@ -35,7 +35,7 @@ const UpdateAlertPage = () => {
 
     update(alertData, {
       onSuccess: () => {
-        navigate('/');
+        navigate('/alerts');
       },
       onError: (err) => alert(err.message),
     });
@@ -44,31 +44,27 @@ const UpdateAlertPage = () => {
   if (isPending) return <h1>Saving alert data...</h1>;
 
   return (
-    <div className="create-page">
+    <div className="update-page">
       <form onSubmit={handleCreate} className="form">
-        <label>
-          displayName
-          <input
-            value={displayName}
-            className="input"
-            type="text"
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </label>
+        <input
+          value={displayName}
+          placeholder="displayName"
+          className="input"
+          type="text"
+          onChange={(e) => setDisplayName(e.target.value)}
+        />
 
-        <label>
-          description
-          <input
-            value={description}
-            className="input"
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
+        <textarea
+          placeholder="description"
+          value={description}
+          className="input"
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
         <label>
           priority
           <select
+            className="select"
             value={priority}
             onChange={(e) => setPriority(e.target.value as AlertPriority)}
           >
@@ -82,6 +78,7 @@ const UpdateAlertPage = () => {
         <label>
           arena
           <select
+            className="select"
             value={arena}
             onChange={(e) => setArena(e.target.value as Arena)}
           >
@@ -94,6 +91,7 @@ const UpdateAlertPage = () => {
         <label>
           status
           <select
+            className="select"
             value={status}
             onChange={(e) => setStatus(e.target.value as Status)}
           >
@@ -102,27 +100,23 @@ const UpdateAlertPage = () => {
           </select>
         </label>
 
-        <label>
-          longitude
-          <input
-            value={lon}
-            className="input"
-            type="number"
-            step="0.0001"
-            onChange={(e) => setLon(Number(e.target.value))}
-          />
-        </label>
+        <input
+          placeholder="longitude"
+          value={lon}
+          className="input"
+          type="number"
+          step="0.0001"
+          onChange={(e) => setLon(Number(e.target.value))}
+        />
 
-        <label>
-          latitude
-          <input
-            value={lat}
-            className="input"
-            type="number"
-            step="0.0001"
-            onChange={(e) => setLat(Number(e.target.value))}
-          />
-        </label>
+        <input
+          placeholder="latitude"
+          value={lat}
+          className="input"
+          type="number"
+          step="0.0001"
+          onChange={(e) => setLat(Number(e.target.value))}
+        />
 
         <button type="submit">Update alert</button>
       </form>
