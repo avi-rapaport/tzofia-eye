@@ -2,6 +2,7 @@ import express from 'express';
 import { alertsService } from '../services/alerts.service.js';
 import { authMiddleware } from '../utils/authMiddleware.js';
 import { arenaMiddleware } from '../utils/arenaMiddleware.js';
+import { statusMiddleware } from '../utils/statusMiddleware.js';
 
 export const router = express.Router();
 
@@ -28,7 +29,7 @@ router.post('/', arenaMiddleware, async (req, res) => {
   res.status(201).json(newAlert);
 });
 
-router.put('/:id', arenaMiddleware, async (req, res) => {
+router.put('/:id', arenaMiddleware, statusMiddleware, async (req, res) => {
   const { id } = req.params;
   const data = req.body;
   const updatedAlert = await alertsService.updateAlert(id, data);
