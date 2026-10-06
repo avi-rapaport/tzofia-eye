@@ -4,6 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { router as alertsRouter } from './routes/alerts.routes.js';
 import { errorHandler } from './utils/errorHandler.js';
+import { router as authRouter } from './routes/auth.routes.js';
 
 const PORT = process.env.PORT;
 
@@ -14,6 +15,7 @@ app.use(cors({ credentials: true, origin: process.env.CLIENT_ORIGIN }));
 app.use(helmet());
 
 app.use('/api/alerts', alertsRouter);
+app.use('/api/auth', authRouter);
 
 app.use((req, res) => {
   res.status(404).json(`${req.url} doesn't have ${req.method} method!`);

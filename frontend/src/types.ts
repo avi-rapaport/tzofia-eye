@@ -52,3 +52,19 @@ export interface AlertStoreProps {
   setSelectedArena: (arena: Arena) => void;
   resetFilters: () => void;
 }
+
+export interface LoginBody {
+  userName: string;
+  password: string;
+}
+
+export type Role = 'arena_user' | 'general_user' | 'admin';
+export type AssignedArena = 'north' | 'south' | 'center' | 'all';
+
+export interface RegisterBody {
+  userNmae: string;
+  password: string;
+  email: string;
+  role: Role;
+  assignedArena: AssignedArena;
+}

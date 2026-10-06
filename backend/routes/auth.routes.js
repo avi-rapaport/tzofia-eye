@@ -35,6 +35,10 @@ router.post('/login', async (req, res) => {
   res.json({ message: 'User logged in successfully' });
 });
 
+router.post('/logout', (req, res) => {
+  res.clearCookie('token', { httpOnly: true, sameSite: 'lax' });
+});
+
 router.delete('/users/:id', adminMiddleware, async (req, res) => {
   const { id } = req.params;
   const deleted = await authService.deleteUserById(id);
