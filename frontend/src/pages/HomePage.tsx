@@ -4,7 +4,7 @@ import AlertsMap from '../components/AlertsMap';
 import AlertsList from '../components/AlertsList';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 const HomePage = () => {
   const { data, isLoading, error } = useFetch<Alert[]>(
@@ -32,21 +32,23 @@ const HomePage = () => {
   );
   const setSelectedArena = useAlertStore((state) => state.setSelectedArena);
 
-  let filterredAlerts = alerts;
-  if (selectedPriority.length > 1) {
-    filterredAlerts = filterredAlerts.filter(
-      (a) => a.priority === selectedPriority
-    );
-  }
-  if (nameSearch.length > 1) {
-    filterredAlerts = filterredAlerts.filter((a) =>
-      a.displayName.toLowerCase().includes(nameSearch.toLowerCase())
-    );
-  }
+  const filterredAlerts = useMemo(() => {
+    return alerts.filter((alert) => {
+      const matchName =
+        nameSearch === '' ||
+        alert.displayName.toLowerCase().includes(nameSearch.toLowerCase());
 
-  if (selectedArena.length > 1) {
-    filterredAlerts = filterredAlerts.filter((a) => a.arena === selectedArena);
-  }
+      const matchPriority =
+        selectedPriority === '' ||
+        alert.priority.toLowerCase() === selectedPriority.toLowerCase();
+
+      const matchArena =
+        selectedArena === '' ||
+        alert.arena.toLowerCase() === selectedArena.toLowerCase();
+      console.log(matchPriority, selectedPriority, selectedArena);
+      return matchName && matchPriority && matchArena;
+    });
+  }, [alerts, nameSearch, selectedPriority, selectedArena]);
 
   console.log(filterredAlerts);
 
@@ -71,6 +73,7 @@ const HomePage = () => {
         <select
           onChange={(e) => setSelectedPriority(e.target.value as AlertPriority)}
         >
+          <option value="">All pririties</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">Hige</option>
@@ -81,6 +84,7 @@ const HomePage = () => {
       <label>
         arena
         <select onChange={(e) => setSelectedArena(e.target.value as Arena)}>
+          <option value="">all arenas</option>
           <option value="north">north</option>
           <option value="south">south</option>
           <option value="center">center</option>

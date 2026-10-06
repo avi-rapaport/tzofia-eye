@@ -4,17 +4,19 @@ import { useUpdateAlerts } from '../hooks/useAlertsApi';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const UpdateAlertPage = () => {
-  const [displayName, setDisplayName] = useState('');
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState<AlertPriority>('Low');
-  const [arena, setArena] = useState<Arena>('center');
-  const [status, setStatus] = useState<Status>('active');
-  const [lon, setLon] = useState<number>(34.7854);
-  const [lat, setLat] = useState<number>(34.7854);
-
   const navigate = useNavigate();
   const location = useLocation();
   const alertToUpdate = location.state;
+
+  const [displayName, setDisplayName] = useState(alertToUpdate.displayName);
+  const [description, setDescription] = useState(alertToUpdate.description);
+  const [priority, setPriority] = useState<AlertPriority>(
+    alertToUpdate.priority
+  );
+  const [arena, setArena] = useState<Arena>(alertToUpdate.arena);
+  const [status, setStatus] = useState<Status>(alertToUpdate.status);
+  const [lon, setLon] = useState<number>(alertToUpdate.lon);
+  const [lat, setLat] = useState<number>(alertToUpdate.lat);
 
   const { mutate: update, isPending } = useUpdateAlerts(alertToUpdate.id);
 
@@ -32,7 +34,9 @@ const UpdateAlertPage = () => {
     };
 
     update(alertData, {
-      onSuccess: () => navigate(`/alerts/${alertToUpdate.id}`),
+      onSuccess: () => {
+        navigate('/');
+      },
       onError: (err) => alert(err.message),
     });
   };
@@ -45,6 +49,7 @@ const UpdateAlertPage = () => {
         <label>
           displayName
           <input
+            value={displayName}
             className="input"
             type="text"
             onChange={(e) => setDisplayName(e.target.value)}
@@ -54,6 +59,7 @@ const UpdateAlertPage = () => {
         <label>
           description
           <input
+            value={description}
             className="input"
             type="text"
             onChange={(e) => setDescription(e.target.value)}
@@ -63,6 +69,7 @@ const UpdateAlertPage = () => {
         <label>
           priority
           <select
+            value={priority}
             onChange={(e) => setPriority(e.target.value as AlertPriority)}
           >
             <option value="Low">Low</option>
@@ -74,7 +81,10 @@ const UpdateAlertPage = () => {
 
         <label>
           arena
-          <select onChange={(e) => setArena(e.target.value as Arena)}>
+          <select
+            value={arena}
+            onChange={(e) => setArena(e.target.value as Arena)}
+          >
             <option value="north">north</option>
             <option value="south">south</option>
             <option value="center">center</option>
@@ -83,7 +93,10 @@ const UpdateAlertPage = () => {
 
         <label>
           status
-          <select onChange={(e) => setStatus(e.target.value as Status)}>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value as Status)}
+          >
             <option value="active">active</option>
             <option value="handled">handled</option>
           </select>
@@ -92,6 +105,7 @@ const UpdateAlertPage = () => {
         <label>
           longitude
           <input
+            value={lon}
             className="input"
             type="number"
             step="0.0001"
@@ -102,6 +116,7 @@ const UpdateAlertPage = () => {
         <label>
           latitude
           <input
+            value={lat}
             className="input"
             type="number"
             step="0.0001"

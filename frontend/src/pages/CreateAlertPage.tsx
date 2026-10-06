@@ -36,6 +36,7 @@ const CreateAlertPage = () => {
             className="input"
             type="text"
             onChange={(e) => setDisplayName(e.target.value)}
+            required
           />
         </label>
 
@@ -45,6 +46,7 @@ const CreateAlertPage = () => {
             className="input"
             type="text"
             onChange={(e) => setDescription(e.target.value)}
+            required
           />
         </label>
 
@@ -52,6 +54,7 @@ const CreateAlertPage = () => {
           priority
           <select
             onChange={(e) => setPriority(e.target.value as AlertPriority)}
+            required
           >
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
@@ -62,7 +65,7 @@ const CreateAlertPage = () => {
 
         <label>
           arena
-          <select onChange={(e) => setArena(e.target.value as Arena)}>
+          <select onChange={(e) => setArena(e.target.value as Arena)} required>
             <option value="north">north</option>
             <option value="south">south</option>
             <option value="center">center</option>
@@ -76,6 +79,7 @@ const CreateAlertPage = () => {
             type="number"
             step="0.0001"
             onChange={(e) => setLon(Number(e.target.value))}
+            required
           />
         </label>
 
@@ -86,6 +90,7 @@ const CreateAlertPage = () => {
             type="number"
             step="0.0001"
             onChange={(e) => setLat(Number(e.target.value))}
+            required
           />
         </label>
 
