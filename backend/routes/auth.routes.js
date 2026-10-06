@@ -17,6 +17,12 @@ router.get('/users', adminMiddleware, async (req, res) => {
   res.json(users);
 });
 
+router.get('/users/:id', (req, res) => {
+  const { id } = req.params;
+  const user = authService.getUserById(id);
+  res.json(user);
+});
+
 router.post('/register', adminMiddleware, async (req, res) => {
   const userData = req.body;
   const created = await authService.register(userData);

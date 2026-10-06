@@ -10,6 +10,7 @@ import AdminRoutes from './AdminRoutes';
 import RegisterPage from '../pages/RegisterPage';
 import UsersPage from '../pages/UsersPage';
 import Layout from '../components/Layout';
+import UserDetailsPage from '../pages/UserDetailsPage';
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route element={<AdminRoutes />}>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/users" element={<UsersPage />} />
+        <Route path="/users/:id" element={<UserDetailsPage />} />
       </Route>
 
       <Route element={<ProtectedRoutes />}>

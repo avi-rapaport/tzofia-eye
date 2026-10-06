@@ -36,6 +36,27 @@ export function useGetUsers() {
   });
 }
 
+export function useGetUserById(userId: string | undefined) {
+  return useQuery({
+    queryKey: ['me'],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:3001/api/auth/users/${userId}`,
+        {
+          credentials: 'include',
+        }
+      );
+      const result = await res.json();
+      console.log(result);
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+      return result;
+    },
+  });
+}
+
 export function useLogin() {
   return useMutation({
     mutationFn: async (body: LoginBody) => {
