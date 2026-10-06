@@ -2,6 +2,7 @@ import { alertsRepo } from '../repositories/alerts.repo.js';
 import { usersRepo } from '../repositories/users.repo.js';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/generateToken.js';
+import { loginSchema, registerSchema } from '../utils/validation.js';
 
 async function getUsers(query) {
   const filter = query ? query : {};
@@ -41,7 +42,7 @@ async function getUserByName(userName) {
 }
 
 async function register(userData) {
-  //validateSchema(createAlertSchema, alertData);
+  validateSchema(registerSchema, userData);
   const userNameExists = getUserByName(userData.userName);
   if (userNameExists) {
     const error = new Error('Username is taken!');
@@ -60,6 +61,7 @@ async function register(userData) {
 }
 
 async function login(userName, password) {
+  validateSchema(loginSchema, { userName, password });
   const user = await getUserByName(userName);
 
   const isAuthenticated = await bcrypt.compare(user.passwordHash, password);
@@ -82,7 +84,7 @@ async function deleteUserById(userId) {
   return { id: _id.toString(), ...rest };
 }
 
-export const alertsService = {
+export const authService = {
   getUsers,
   getUserById,
   getUserByName,

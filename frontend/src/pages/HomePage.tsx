@@ -73,7 +73,7 @@ const HomePage = () => {
         <select
           onChange={(e) => setSelectedPriority(e.target.value as AlertPriority)}
         >
-          <option value="">All pririties</option>
+          <option value="">All</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">Hige</option>
@@ -84,7 +84,7 @@ const HomePage = () => {
       <label>
         arena
         <select onChange={(e) => setSelectedArena(e.target.value as Arena)}>
-          <option value="">all arenas</option>
+          <option value="">all</option>
           <option value="north">north</option>
           <option value="south">south</option>
           <option value="center">center</option>

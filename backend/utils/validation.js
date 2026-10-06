@@ -19,6 +19,19 @@ export const updateAlertSchema = z.object({
   lat: z.number().min(-90).max(90),
 });
 
+export const registerSchema = z.object({
+  userName: z.string(),
+  password: z.string().minLength(6),
+  email: z.email(),
+  role: z.enum(['arenaUser', 'generalUser', 'admin']),
+  assignedArena: z.enum(['north', 'south', 'center', 'all']),
+});
+
+export const loginSchema = z.object({
+  userName: z.string(),
+  password: z.string().minLength(6),
+});
+
 export function validateSchema(schema, body) {
   const result = schema.safeParse(body);
   if (!result.success) {
@@ -27,6 +40,8 @@ export function validateSchema(schema, body) {
     error.status = 400;
     throw error;
   }
+
+  body = result.data;
 }
 
 // {
